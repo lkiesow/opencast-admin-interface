@@ -23,6 +23,8 @@ jobs:
 
       - name: build project
         working-directory: ./app
+        env:
+          CI: false
         run: npm run build
 
       - name: create pages directory
@@ -36,6 +38,9 @@ jobs:
       - name: include mock data
         working-directory: ./app/gh-pages
         run: cp -rv ../../test/app/GET/* .
+
+      - name: include landing page
+        run: cp .github/demo-page.html app/gh-pages/
 
       - name: upload test page artifact
         uses: actions/upload-pages-artifact@v1
