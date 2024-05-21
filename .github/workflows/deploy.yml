@@ -1,0 +1,61 @@
+on:
+  push:
+    tags:
+    - '*-*-*'
+
+name: Create release draft 
+
+jobs:
+  build:
+    name: Create release from tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: get node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: download dependencies
+        working-directory: ./app
+        run: npm ci
+
+      - name: build project
+        working-directory: ./app
+        run: npm run build
+
+      - name: create pages directory
+        working-directory: ./app
+        run: mkdir gh-pages
+
+      - name: include admin intterface
+        working-directory: ./app
+        run: mv build gh-pages/admin-ui
+
+      - name: include mock data
+        working-directory: ./app/gh-pages
+        run: cp -rv ../../test/app/GET/* .
+
+      - name: upload test page artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./app/gh-pages
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
