@@ -1,13 +1,12 @@
+name: Publish Test Page
+
 on:
   push:
-    tags:
-    - '*-*-*'
-
-name: Create release draft 
+    branches:
+      - main
 
 jobs:
   build:
-    name: Create release from tag
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
