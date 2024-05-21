@@ -40,7 +40,7 @@ jobs:
         run: cp -rv ../../test/app/GET/* .
 
       - name: include landing page
-        run: cp .github/demo-page.html app/gh-pages/
+        run: cp .github/demo-page.html app/gh-pages/index.html
 
       - name: upload test page artifact
         uses: actions/upload-pages-artifact@v1
