@@ -59,4 +59,4 @@ jobs:
 
             It may take a few seconds for the interface to spin up.
             It will then be available at https://127.0.0.1:3000.
-          For more options you can pass on to the proxy, take a look at the `README.md`.
+            For more options you can pass on to the proxy, take a look at the `README.md`.
