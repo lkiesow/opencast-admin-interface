@@ -39,22 +39,22 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-    - name: Add comment
-      uses: thollander/actions-comment-pull-request@main
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        message: >
-          Use `docker` or `podman` to test this pull request locally.
+      - name: Add comment
+        uses: thollander/actions-comment-pull-request@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            Use `docker` or `podman` to test this pull request locally.
 
-          Local test with mock data
-          ```
-          podman run --rm -p 127.0.0.1:3000:3000 ghcr.io/opencast/opencast-admin-interface:main
-          ```
+            Local test with mock data
+            ```
+            podman run --rm -p 127.0.0.1:3000:3000 ghcr.io/opencast/opencast-admin-interface:main
+            ```
 
-          Proxy data from develop.opencast.org
-          ```
-          podman run --rm -p 127.0.0.1:3000:3000 -e PROXY_TARGET=https://develop.opencast.org localhost/opencast-admin-interface:main
-          ```
+            Proxy data from develop.opencast.org
+            ```
+            podman run --rm -p 127.0.0.1:3000:3000 -e PROXY_TARGET=https://develop.opencast.org localhost/opencast-admin-interface:main
+            ```
 
-          It may take a few seconds for the interface to spin up.
-          It will then be available at https://127.0.0.1:3000.
+            It may take a few seconds for the interface to spin up.
+            It will then be available at https://127.0.0.1:3000.
