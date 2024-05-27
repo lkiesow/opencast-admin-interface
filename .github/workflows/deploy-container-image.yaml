@@ -46,6 +46,7 @@ jobs:
         with:
           message: |
             Use `docker` or `podman` to test this pull request locally.
+
             ${{ steps.meta.outputs.tags }}
             ${{ steps.meta.outputs.tags[0] }}
 
