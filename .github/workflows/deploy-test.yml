@@ -33,6 +33,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_URL: /${{ steps.build-path.outputs.build }}
+          CI: false
 
       - name: prepare git
         run: |
