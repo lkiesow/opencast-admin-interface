@@ -11,8 +11,8 @@ jobs:
   container-image:
     runs-on: ubuntu-latest
     permissions:
-      packages: write
       contents: read
+      packages: write
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
