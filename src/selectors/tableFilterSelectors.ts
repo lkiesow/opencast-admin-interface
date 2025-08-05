@@ -20,7 +20,7 @@ export const getFilters = createSelector(
 export const getTextFilter = createSelector(
 	[getAllTextFilter, (state, resource: Resource) => resource],
 	(textFilter, resource) => {
-		const textFilte = textFilter.find(obj => obj.resource === resource);
+		const textFilte = (textFilter || []).find(obj => obj.resource === resource);
 		return textFilte?.text ?? "";
 	},
 );
