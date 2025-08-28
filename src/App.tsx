@@ -16,9 +16,14 @@ import About from "./components/About";
 import { useAppDispatch } from "./store";
 import { fetchOcVersion, fetchUserInfo } from "./slices/userInfoSlice";
 import { subscribeToAuthEvents } from "./utils/broadcastSync";
+import { useTableFilterStateValidation } from "./hooks/useTableFilterStateValidation";
 
 function App() {
 	const dispatch = useAppDispatch();
+	
+	// Validate and fix corrupted table filter state on app initialization
+	useTableFilterStateValidation();
+	
 	useEffect(() => {
 		// Load information about current user on mount
 		dispatch(fetchUserInfo());

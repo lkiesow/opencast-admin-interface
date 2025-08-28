@@ -380,6 +380,21 @@ const tableFilterSlice = createSlice({
 		removeSecondFilter(state) {
 			state.secondFilter = "";
 		},
+		resetCorruptedState(state) {
+			// Reset corrupted localStorage state to initial values
+			if (!Array.isArray(state.data)) {
+				console.warn("Resetting corrupted tableFilters.data to empty array");
+				state.data = [];
+			}
+			if (!Array.isArray(state.textFilter)) {
+				console.warn("Resetting corrupted tableFilters.textFilter to empty array");
+				state.textFilter = [];
+			}
+			if (!Array.isArray(state.stats)) {
+				console.warn("Resetting corrupted tableFilters.stats to empty array");
+				state.stats = [];
+			}
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -427,6 +442,7 @@ export const {
 	removeSelectedFilter,
 	editSecondFilter,
 	removeSecondFilter,
+	resetCorruptedState,
 } = tableFilterSlice.actions;
 
 // Export the slice reducer as the default export
